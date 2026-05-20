@@ -2,9 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminDashboard from "./pages/AdminDashboard";
-import SupplierDashboard from "./pages/SupplierDashboard";
 import VendorDashboard from "./pages/VendorDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import SupplierRoutes from "./routes/SupplierRoutes";
 
 function App() {
   return (
@@ -12,6 +12,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* Admin */}
         <Route
           path="/admin/dashboard"
           element={
@@ -20,14 +22,11 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/supplier/dashboard"
-          element={
-            <ProtectedRoute allowedRole="supplier">
-              <SupplierDashboard />
-            </ProtectedRoute>
-          }
-        />
+
+        {/* Supplier - All Routes */}
+        <Route path="/supplier/*" element={<SupplierRoutes />} />
+
+        {/* Vendor */}
         <Route
           path="/vendor/dashboard"
           element={
