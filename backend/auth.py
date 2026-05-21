@@ -70,3 +70,9 @@ def register_user(data):
     conn.commit()
     conn.close()
     return user_id
+def verify_token(token):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        return payload
+    except:
+        return None
