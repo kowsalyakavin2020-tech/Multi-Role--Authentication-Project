@@ -1,3 +1,5 @@
+// src/data/supplierMockData.js
+
 // Supplier Dashboard Stats
 export const statsData = [
   {
@@ -34,7 +36,7 @@ export const statsData = [
 export const productsData = [
   {
     id: 1,
-    image: "https://via.placeholder.com/50",
+    image: "https://api.dicebear.com/7.x/shapes/svg?seed=mouse&backgroundColor=dbeafe",
     name: "Wireless Mouse",
     category: "Electronics",
     stock: 150,
@@ -43,7 +45,7 @@ export const productsData = [
   },
   {
     id: 2,
-    image: "https://via.placeholder.com/50",
+    image: "https://api.dicebear.com/7.x/shapes/svg?seed=usbhub&backgroundColor=fee2e2",
     name: "USB Hub",
     category: "Electronics",
     stock: 0,
@@ -52,7 +54,7 @@ export const productsData = [
   },
   {
     id: 3,
-    image: "https://via.placeholder.com/50",
+    image: "https://api.dicebear.com/7.x/shapes/svg?seed=lamp&backgroundColor=dcfce7",
     name: "Desk Lamp",
     category: "Furniture",
     stock: 45,
@@ -61,7 +63,7 @@ export const productsData = [
   },
   {
     id: 4,
-    image: "https://via.placeholder.com/50",
+    image: "https://api.dicebear.com/7.x/shapes/svg?seed=keyboard&backgroundColor=fef9c3",
     name: "Keyboard",
     category: "Electronics",
     stock: 80,
@@ -70,7 +72,7 @@ export const productsData = [
   },
   {
     id: 5,
-    image: "https://via.placeholder.com/50",
+    image: "https://api.dicebear.com/7.x/shapes/svg?seed=stand&backgroundColor=f3e8ff",
     name: "Monitor Stand",
     category: "Furniture",
     stock: 0,
