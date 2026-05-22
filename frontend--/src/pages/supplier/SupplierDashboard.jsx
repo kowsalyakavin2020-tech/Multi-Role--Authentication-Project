@@ -1,4 +1,3 @@
-// src/pages/supplier/SupplierDashboard.jsx
 import useDashboard from "../../hooks/useDashboard";
 
 function SupplierDashboard() {
@@ -56,13 +55,11 @@ function SupplierDashboard() {
 
   return (
     <div>
-      {/* Header */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Dashboard</h2>
         <p className="text-gray-500 text-sm mt-1">Welcome back, Supplier!</p>
       </div>
 
-      {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
         {statsData.map((stat) => (
           <div key={stat.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-center gap-4">
@@ -77,7 +74,6 @@ function SupplierDashboard() {
         ))}
       </div>
 
-      {/* Recent Activity */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
         <h3 className="font-semibold text-gray-800 mb-4">Recent Activity</h3>
         {stats?.recent_activity?.length > 0 ? (

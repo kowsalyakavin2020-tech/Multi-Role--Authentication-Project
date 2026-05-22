@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect } from "react";
-import { getDashboardStats } from "../services/api/dashboardApi";
+import { getDashboardStats } from "../../../backend/services/api/dashboardApi";
 
 const useDashboard = () => {
   const [stats, setStats] = useState(null);

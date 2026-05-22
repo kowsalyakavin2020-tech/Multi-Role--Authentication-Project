@@ -25,12 +25,10 @@ function StockList() {
 
   return (
     <div>
-      {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Stock List</h2>
       </div>
 
-      {/* Stock Table */}
       <div className="bg-white rounded-xl shadow-md overflow-hidden">
         <table className="w-full text-sm text-left">
           <thead className="bg-blue-900 text-white">

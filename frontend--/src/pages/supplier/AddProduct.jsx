@@ -101,7 +101,6 @@ function AddProduct() {
 
   return (
     <div>
-      {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
           <h2 className="text-2xl font-bold text-gray-800">Add Product</h2>
@@ -115,7 +114,6 @@ function AddProduct() {
         </button>
       </div>
 
-      {/* Product Table */}
       <div className="bg-white rounded-xl shadow-md overflow-hidden">
         <table className="w-full text-sm text-left">
           <thead className="bg-blue-900 text-white">
@@ -187,7 +185,6 @@ function AddProduct() {
         )}
       </div>
 
-      {/* Add / Edit Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md">
@@ -195,10 +192,7 @@ function AddProduct() {
               <h3 className="text-lg font-bold text-gray-800">
                 {editMode ? "Edit Product" : "New Product"}
               </h3>
-              <button
-                onClick={handleCloseModal}
-                className="text-gray-400 hover:text-gray-600 text-xl font-bold"
-              >
+              <button onClick={handleCloseModal} className="text-gray-400 hover:text-gray-600 text-xl font-bold">
                 ✕
               </button>
             </div>
