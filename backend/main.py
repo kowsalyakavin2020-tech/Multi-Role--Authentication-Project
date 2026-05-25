@@ -235,3 +235,140 @@ def get_vendor_requests(current_user: dict = Depends(get_current_user)):
     cursor.close()
     conn.close()
     return {"requests": requests}
+# ─── Vendor Dashboard Summary ──────────────────────────────
+@app.get("/vendor/dashboard/summary")
+def get_vendor_summary(current_user: dict = Depends(get_current_user)):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    mobile = current_user["mobile"]
+
+    cursor.execute("SELECT user_id FROM users WHERE mobile = %s", (mobile,))
+    vendor = cursor.fetchone()
+    if not vendor:
+        raise HTTPException(status_code=404, detail="Vendor not found")
+    vendor_id = vendor["user_id"]
+
+    # Total Available Products
+    cursor.execute("SELECT COUNT(*) as total FROM products WHERE status = 'Active'")
+    total_products = cursor.fetchone()["total"]
+
+    # My Orders
+    cursor.execute("SELECT COUNT(*) as total FROM orders WHERE vendor_id = %s", (vendor_id,))
+    my_orders = cursor.fetchone()["total"]
+
+    # Pending Requests
+    cursor.execute("""
+        SELECT COUNT(*) as total FROM orders 
+        WHERE vendor_id = %s AND status = 'Pending'
+    """, (vendor_id,))
+    pending_requests = cursor.fetchone()["total"]
+
+    # Recent Activity
+    cursor.execute("""
+        SELECT o.*, p.name as product_name 
+        FROM orders o
+        JOIN products p ON o.product_id = p.product_id
+        WHERE o.vendor_id = %s
+        ORDER BY o.created_at DESC LIMIT 5
+    """, (vendor_id,))
+    recent_activity = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return {
+        "total_products": total_products,
+        "my_orders": my_orders,
+        "pending_requests": pending_requests,
+        "recent_activity": recent_activity
+    }
+
+# ─── Vendor Browse Products ────────────────────────────────
+@app.get("/vendor/products")
+def get_vendor_products(current_user: dict = Depends(get_current_user)):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT p.*, u.name as supplier_name 
+        FROM products p
+        JOIN users u ON p.supplier_id = u.user_id
+        WHERE p.status = 'Active'
+        ORDER BY p.created_at DESC
+    """)
+    products = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+    return {"products": products}
+
+# ─── Vendor Send Request ───────────────────────────────────
+class OrderModel(BaseModel):
+    product_id: str
+    supplier_id: str
+    quantity: int
+    message: Optional[str] = ""
+
+@app.post("/vendor/request")
+def send_request(order: OrderModel, current_user: dict = Depends(get_current_user)):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    mobile = current_user["mobile"]
+
+    cursor.execute("SELECT user_id FROM users WHERE mobile = %s", (mobile,))
+    vendor = cursor.fetchone()
+    if not vendor:
+        raise HTTPException(status_code=404, detail="Vendor not found")
+    vendor_id = vendor["user_id"]
+
+    order_id = "ORD" + str(uuid.uuid4())[:5].upper()
+
+    cursor.execute("""
+        INSERT INTO orders (order_id, vendor_id, supplier_id, product_id, quantity, message)
+        VALUES (%s, %s, %s, %s, %s, %s)
+    """, (order_id, vendor_id, order.supplier_id, order.product_id, order.quantity, order.message))
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return {"message": "Request sent successfully!", "order_id": order_id}
+
+# ─── Vendor My Orders ──────────────────────────────────────
+@app.get("/vendor/orders")
+def get_vendor_orders(current_user: dict = Depends(get_current_user)):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    mobile = current_user["mobile"]
+
+    cursor.execute("SELECT user_id FROM users WHERE mobile = %s", (mobile,))
+    vendor = cursor.fetchone()
+    if not vendor:
+        raise HTTPException(status_code=404, detail="Vendor not found")
+    vendor_id = vendor["user_id"]
+
+    cursor.execute("""
+        SELECT o.*, p.name as product_name, u.name as supplier_name
+        FROM orders o
+        JOIN products p ON o.product_id = p.product_id
+        JOIN users u ON o.supplier_id = u.user_id
+        WHERE o.vendor_id = %s
+        ORDER BY o.created_at DESC
+    """, (vendor_id,))
+    orders = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+    return {"orders": orders}
+@app.get("/vendor/profile")
+def get_vendor_profile(current_user: dict = Depends(get_current_user)):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    mobile = current_user["mobile"]
+    cursor.execute("SELECT * FROM users WHERE mobile = %s", (mobile,))
+    user = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user   
+    
