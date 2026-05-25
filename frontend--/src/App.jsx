@@ -2,9 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminDashboard from "./pages/AdminDashboard";
-import VendorDashboard from "./pages/VendorDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SupplierRoutes from "./routes/SupplierRoutes";
+import VendorRoutes from "./routes/VendorRoutes";
 
 function App() {
   return (
@@ -23,18 +23,11 @@ function App() {
           }
         />
 
-        {/* Supplier - All Routes */}
+        {/* Supplier */}
         <Route path="/supplier/*" element={<SupplierRoutes />} />
 
         {/* Vendor */}
-        <Route
-          path="/vendor/dashboard"
-          element={
-            <ProtectedRoute allowedRole="vendor">
-              <VendorDashboard />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/vendor/*" element={<VendorRoutes />} />
       </Routes>
     </BrowserRouter>
   );
