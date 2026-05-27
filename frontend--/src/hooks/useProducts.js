@@ -14,7 +14,7 @@ const useProducts = () => {
     try {
       setLoading(true);
       const data = await getProducts();
-      setProducts(data.products);
+      setProducts(data.data);
     } catch (err) {
       setError("Failed to load products. Please try again!");
     } finally {

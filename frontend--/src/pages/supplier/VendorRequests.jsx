@@ -42,13 +42,15 @@ function VendorRequests() {
           </thead>
           <tbody className="divide-y divide-gray-100">
             {requests.map((request) => (
-              <tr key={request.id} className="hover:bg-gray-50 transition">
+              <tr key={request.order_id} className="hover:bg-gray-50 transition">
                 <td className="px-4 py-3 font-medium text-gray-800">
-                  {request.vendorName}
+                  {request.vendor_name}
                 </td>
-                <td className="px-4 py-3 text-gray-600">{request.product}</td>
+                <td className="px-4 py-3 text-gray-600">{request.product_name}</td>
                 <td className="px-4 py-3 text-gray-600">{request.quantity}</td>
-                <td className="px-4 py-3 text-gray-600">{request.date}</td>
+                <td className="px-4 py-3 text-gray-600">
+                  {new Date(request.created_at).toLocaleDateString()}
+                </td>
                 <td className="px-4 py-3">
                   <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
                     request.status === "Approved"
@@ -63,13 +65,13 @@ function VendorRequests() {
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
                     <button
-                      onClick={() => handleApprove(request.id)}
+                      onClick={() => handleApprove(request.order_id)}
                       className="bg-green-100 text-green-700 px-3 py-1 rounded-lg text-xs hover:bg-green-200 transition"
                     >
                       Approve
                     </button>
                     <button
-                      onClick={() => handleReject(request.id)}
+                      onClick={() => handleReject(request.order_id)}
                       className="bg-red-100 text-red-700 px-3 py-1 rounded-lg text-xs hover:bg-red-200 transition"
                     >
                       Reject

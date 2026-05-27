@@ -11,7 +11,7 @@ function VendorDashboard() {
       try {
         setLoading(true);
         const response = await apiClient.get("/vendor/dashboard/summary");
-        setStats(response.data);
+        setStats(response.data.data);
       } catch (err) {
         setError("Failed to load dashboard data. Please try again!");
       } finally {

@@ -11,7 +11,7 @@ function VendorProfile() {
     const fetchProfile = async () => {
       try {
         const response = await apiClient.get("/vendor/profile");
-        setProfile(response.data);
+        setProfile(response.data.data);
       } catch (err) {
         console.error("Failed to load profile");
       } finally {

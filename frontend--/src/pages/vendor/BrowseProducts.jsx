@@ -21,7 +21,7 @@ function BrowseProducts() {
     try {
       setLoading(true);
       const response = await apiClient.get("/vendor/products");
-      setProducts(response.data.products);
+      setProducts(response.data.data);
     } catch (err) {
       setError("Failed to load products. Please try again!");
     } finally {

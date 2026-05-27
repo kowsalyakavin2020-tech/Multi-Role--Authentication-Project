@@ -11,7 +11,7 @@ const useDashboard = () => {
       try {
         setLoading(true);
         const data = await getDashboardStats();
-        setStats(data);
+        setStats(data.data);
       } catch (err) {
         setError("Failed to load dashboard data. Please try again!");
       } finally {

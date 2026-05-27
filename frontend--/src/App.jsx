@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SupplierRoutes from "./routes/SupplierRoutes";
 import VendorRoutes from "./routes/VendorRoutes";
+import AdminRoutes from "./routes/AdminRoutes";
 
 function App() {
   return (
@@ -14,14 +14,7 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* Admin */}
-        <Route
-          path="/admin/dashboard"
-          element={
-            <ProtectedRoute allowedRole="admin">
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/admin/*" element={<AdminRoutes />} />
 
         {/* Supplier */}
         <Route path="/supplier/*" element={<SupplierRoutes />} />

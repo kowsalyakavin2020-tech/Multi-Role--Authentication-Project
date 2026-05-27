@@ -23,7 +23,7 @@ function Login() {
         "http://localhost:8000/auth/verify-otp",
         { mobile, otp }
       );
-      const { token, role, is_new_user, user_id } = response.data;
+      const { token, role, is_new_user, user_id } = response.data.data;
       if (is_new_user) {
         navigate("/register", { state: { mobile } });
         return;
@@ -35,7 +35,7 @@ function Login() {
       else if (role === "supplier") navigate("/supplier/dashboard");
       else if (role === "vendor") navigate("/vendor/dashboard");
     } catch (err) {
-      alert("தப்பான OTP!");
+      alert("Invalid OTP!");
     }
   };
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getVendorRequests, approveVendorRequest, rejectVendorRequest } from "../../../backend/services/api/vendorRequestApi";
+import { getVendorRequests, approveVendorRequest, rejectVendorRequest } from "../services/api/vendorRequestApi";
 
 const useVendorRequests = () => {
   const [requests, setRequests] = useState([]);
@@ -14,7 +14,7 @@ const useVendorRequests = () => {
     try {
       setLoading(true);
       const data = await getVendorRequests();
-      setRequests(data.requests);
+      setRequests(data.data);
     } catch (err) {
       setError("Failed to load vendor requests. Please try again!");
     } finally {
