@@ -3,17 +3,17 @@ import AdminSidebar from "./AdminSidebar";
 
 function AdminLayout({ children }) {
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Top Navbar */}
-      <AdminNavbar />
+    <div className="min-h-screen bg-slate-100">
+      {/* Sidebar */}
+      <AdminSidebar />
 
-      {/* Sidebar + Main Content */}
-      <div className="flex">
-        {/* Sidebar */}
-        <AdminSidebar />
+      {/* Main Content */}
+      <div className="ml-56">
+        {/* Navbar */}
+        <AdminNavbar />
 
-        {/* Main Content */}
-        <div className="flex-1 ml-52 mt-16 p-6">
+        {/* Page Content */}
+        <div className="mt-14 p-6">
           {children}
         </div>
       </div>
