@@ -8,6 +8,7 @@ import {
   BarChart2,
   UserCircle,
   LogOut,
+  FileText,
 } from "lucide-react";
 
 const menus = [
@@ -17,6 +18,7 @@ const menus = [
   { name: "Products", path: "/admin/products", icon: <Package size={16} /> },
   { name: "Orders", path: "/admin/orders", icon: <ClipboardList size={16} /> },
   { name: "Stock Monitoring", path: "/admin/stock-monitoring", icon: <BarChart2 size={16} /> },
+  { name: "Reports", path: "/admin/reports", icon: <FileText size={16} /> },
   { name: "Profile", path: "/admin/profile", icon: <UserCircle size={16} /> },
 ];
 
@@ -32,7 +34,6 @@ function AdminSidebar() {
 
   return (
     <div className="w-56 bg-slate-900 fixed top-0 left-0 bottom-0 z-20 flex flex-col">
-      {/* Logo */}
       <div className="px-5 py-4 border-b border-slate-700 shrink-0">
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-xs">
@@ -42,7 +43,6 @@ function AdminSidebar() {
         </div>
       </div>
 
-      {/* Menu — scrollable */}
       <div className="flex-1 overflow-y-auto px-3 py-3 space-y-0.5">
         <p className="text-slate-500 text-xs font-semibold uppercase px-3 mb-2">
           Main Menu
@@ -65,7 +65,6 @@ function AdminSidebar() {
         ))}
       </div>
 
-      {/* Logout — always at bottom */}
       <div className="px-3 py-3 border-t border-slate-700 shrink-0">
         <button
           onClick={handleLogout}

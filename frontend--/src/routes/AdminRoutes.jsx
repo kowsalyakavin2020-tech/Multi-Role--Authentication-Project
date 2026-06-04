@@ -7,6 +7,7 @@ import Products from "../pages/admin/Products";
 import Orders from "../pages/admin/Orders";
 import StockMonitoring from "../pages/admin/StockMonitoring";
 import AdminProfile from "../pages/admin/AdminProfile";
+import Reports from "../pages/admin/Reports";
 
 function AdminRoutes() {
   const token = localStorage.getItem("token");
@@ -26,6 +27,7 @@ function AdminRoutes() {
         <Route path="orders" element={<Orders />} />
         <Route path="stock-monitoring" element={<StockMonitoring />} />
         <Route path="profile" element={<AdminProfile />} />
+        <Route path="reports" element={<Reports />} />
       </Routes>
     </AdminLayout>
   );
